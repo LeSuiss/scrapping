@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const {mergeWith, add, reject, isEmpty} = require ("lodash")
+const {isEmpty} = require ("lodash")
 
 module.exports = {
     click: async function(page, selector){
@@ -61,7 +61,7 @@ module.exports = {
         let pageName = pageToHandle._target._targetInfo.url
         pageName = pageName.replace(/\//g, "_").replace('https:__',"")
         
-        const folder = await new Promise((resolve,err) => fs.readdir(
+        const folder = await new Promise((resolve,reject) => fs.readdir(
                 path.dirname(require.main.filename )+"/screenshots",
                 (err, files)=>{
                     const fileList = files.filter(files=>files.includes(pageName))
